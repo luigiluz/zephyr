@@ -1,0 +1,10 @@
+# Kconfig - GATT OpenThread Setup Service
+#
+# Copyright (c) 2019, CESAR. All rights reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+menuconfig BT_GATT_OT_SETUP
+	bool "Enable GATT OpenThread Setup Service"
+	default n

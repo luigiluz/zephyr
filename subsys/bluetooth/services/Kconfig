@@ -10,6 +10,7 @@ if BT_CONN
 menu "GATT Services"
 
 source "subsys/bluetooth/services/Kconfig.dis"
+source "subsys/bluetooth/services/Kconfig.setup_ot"
 
 endmenu
 
