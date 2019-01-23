@@ -89,3 +89,5 @@ config SETTINGS_FS_MAX_LINES
 	depends on SETTINGS && SETTINGS_FS
 	help
 	  Limit how many items stored in a file before compressing
+
+source "subsys/settings/services/Kconfig"

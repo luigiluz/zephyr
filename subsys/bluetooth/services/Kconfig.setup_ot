@@ -8,3 +8,4 @@
 menuconfig BT_GATT_OT_SETUP
 	bool "Enable GATT OpenThread Setup Service"
 	default n
+	depends on SETTINGS_OT

@@ -1,0 +1,1 @@
+zephyr_sources_ifdef(CONFIG_SETTINGS_OT settings_ot.c)

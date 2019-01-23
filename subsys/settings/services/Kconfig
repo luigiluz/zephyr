@@ -1,0 +1,9 @@
+if SETTINGS
+
+menu "Settings Services"
+
+source "subsys/settings/services/Kconfig.settings_ot"
+
+endmenu
+
+endif # SETTINGS

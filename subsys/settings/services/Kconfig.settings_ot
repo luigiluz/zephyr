@@ -1,0 +1,22 @@
+# Kconfig - Settings OpenThread Service
+#
+# Copyright (c) 2019, CESAR. All rights reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+menuconfig SETTINGS_OT
+	bool "Enable Settings OpenThread Service"
+	default n
+	depends on SETTINGS
+
+menuconfig SETTINGS_OT_DEBUG
+	bool "Enable debug"
+	default n
+	depends on SETTINGS_OT && LOG
+
+menuconfig SETTINGS_OT_DEBUG_LEVEL
+	int "Define debug level"
+	default 4 if SETTINGS_OT_DEBUG
+	default 0
+	depends on SETTINGS_OT_DEBUG
