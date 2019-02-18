@@ -46,6 +46,9 @@ int settings_ot_write(enum settings_ot_type type, void *src);
 /* Return number of written bytes or negative on failure */
 int settings_ot_read(enum settings_ot_type type, void *dest);
 
+/* Clear all stored values */
+int settings_ot_reset(void);
+
 #ifdef __cplusplus
 }
 #endif

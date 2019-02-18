@@ -259,3 +259,53 @@ int settings_ot_read(enum settings_ot_type type, void *dest)
 
 	return len;
 }
+
+
+static int reset_value(char *key)
+{
+	int rc;
+
+	rc = settings_delete(key);
+	if (rc)
+		STTNGS_OT_ERR("Deleting \"%s\" failed (err %d)", key, rc);
+
+	return rc;
+}
+
+int settings_ot_reset(void)
+{
+	int rc;
+	int ret = 0;
+
+	rc = reset_value(SAVE_PANID_KEY);
+	if (rc)
+		ret = -1;
+	else
+		panid_loaded = false;
+
+	rc = reset_value(SAVE_CHANNEL_KEY);
+	if (rc)
+		ret = -1;
+	else
+		channel_loaded = false;
+
+	rc = reset_value(SAVE_NET_NAME_KEY);
+	if (rc)
+		ret = -1;
+	else
+		net_name_loaded = false;
+
+	rc = reset_value(SAVE_XPANID_KEY);
+	if (rc)
+		ret = -1;
+	else
+		xpanid_loaded = false;
+
+	rc = reset_value(SAVE_MASTERKEY_KEY);
+	if (rc)
+		ret = -1;
+	else
+		masterkey_loaded = false;
+
+	return ret;
+}
