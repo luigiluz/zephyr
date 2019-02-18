@@ -96,7 +96,8 @@ static int set(int argc, char **argv, void *value_ctx)
 
 	rc = settings_val_read_cb(value_ctx, target, len);
 	if (rc < 0){
-		STTNGS_OT_ERR("Failed to load value from storage");
+		STTNGS_OT_WRN("Failed to load value from storage");
+		*loaded_flag = false;
 		return rc;
 	}
 
