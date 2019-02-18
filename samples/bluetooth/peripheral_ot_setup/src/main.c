@@ -132,4 +132,10 @@ void main(void)
 	}
 
 	printk("Advertising successfully started\n");
+
+	/* Reset OT settings if invalid PAN ID detected on storage */
+	if (panid == 0xFFFF) {
+		printk("Reseting OT settings\n");
+		err = settings_ot_reset();
+	}
 }
