@@ -134,13 +134,6 @@ int settings_ot_init(void)
 		return err;
 	}
 
-	STTNGS_OT_DBG("Loading settings");
-	err = settings_load();
-	if (err) {
-		STTNGS_OT_ERR("Settings load failed (err %d)", err);
-		return err;
-	}
-
 	return 0;
 }
 

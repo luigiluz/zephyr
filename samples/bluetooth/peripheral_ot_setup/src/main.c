@@ -12,6 +12,7 @@
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/conn.h>
 
+#include <settings/settings.h>
 #include <settings/settings_ot.h>
 
 /* Buffers sizes */
@@ -102,6 +103,11 @@ void main(void)
 		printk("Settings OT init failed (err %d)\n", err);
 		return;
 	}
+
+	printk("Loading stored values\n");
+	err = settings_load();
+	if (err)
+		printk("Settings load failed (err %d)\n", err);
 
 	err = load_values();
 	if (err)
