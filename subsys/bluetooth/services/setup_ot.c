@@ -15,6 +15,7 @@
 
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/gatt.h>
+#include <bluetooth/services/setup_ot.h>
 
 #include <settings/settings_ot.h>
 
@@ -28,6 +29,8 @@ static u8_t channel;			// Channel
 static char net_name[NET_NAME_LEN];	// Network name
 static char xpanid[XPANID_LEN];		// Expanded PAN Id
 static char masterkey[MASTERKEY_LEN];	// Master key
+
+setup_ot_updated_cb updated_cb = NULL;
 
 #define READ_STR_CALLBACK_DECLARE(KEY, VALUE)				       \
 	static ssize_t VALUE ## _read_cb(struct bt_conn *conn,		       \
@@ -134,6 +137,13 @@ static ssize_t panid_read_cb(struct bt_conn *conn,
 	return bt_gatt_attr_read(conn, attr, buf, len, offset, &value_le, max_len);
 }
 
+/* Run value updated callback if set */
+static void run_updated_cb(void)
+{
+	if (updated_cb != NULL)
+		updated_cb();
+}
+
 /* Write string characteristic callback function */
 static ssize_t str_write_cb(struct bt_conn *conn,
 			    const struct bt_gatt_attr *attr, const void *buf,
@@ -156,6 +166,8 @@ static ssize_t str_write_cb(struct bt_conn *conn,
 
 	/* Store value at Settings */
 	settings_ot_write(type, value);
+
+	run_updated_cb();
 
 	return len;
 }
@@ -182,6 +194,8 @@ static ssize_t panid_write_cb(struct bt_conn *conn,
 	/* Store value at Settings */
 	settings_ot_write(SETTINGS_OT_PANID, value);
 
+	run_updated_cb();
+
 	return len;
 }
 
@@ -204,6 +218,8 @@ static ssize_t channel_write_cb(struct bt_conn *conn,
 
 	/* Store value at Settings */
 	settings_ot_write(SETTINGS_OT_CHANNEL, value);
+
+	run_updated_cb();
 
 	return len;
 }
@@ -257,6 +273,11 @@ static int gatt_ot_init(struct device *dev)
 	ARG_UNUSED(dev);
 
 	return bt_gatt_service_register(&gatt_ot_svc);
+}
+
+void setup_ot_updated_cb_register(setup_ot_updated_cb cb)
+{
+	updated_cb = cb;
 }
 
 SYS_INIT(gatt_ot_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);
