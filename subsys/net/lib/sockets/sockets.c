@@ -116,7 +116,7 @@ int zsock_socket_internal(int family, int type, int proto)
 	 * context, it's not disposed of immediately - there's yet
 	 * closing handshake for stack to perform.
 	 */
-	if (proto == IPPROTO_TCP) {
+	if (proto == IPPROTO_TCP && !CONFIG_OPENTHREAD_PLAT) {
 		net_context_ref(ctx);
 	}
 
