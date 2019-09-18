@@ -1,0 +1,28 @@
+#
+# Code based on nrf52840_pca10059.
+# Base commit: b8d3ee8afb49d27c3e0c2aba946629620f3f3dd0
+# Edited by KNoT contributors.
+#
+
+# Kconfig - KNoT Mesh board configuration
+#
+# Copyright (c) 2019 CESAR
+# Copyright (c) 2018 Nordic Semiconductor ASA
+#
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_KNOT_MESH
+
+config BOARD_ENABLE_DCDC
+        bool "Enable DCDC mode"
+        select SOC_DCDC_NRF52X
+        default y
+
+config BOARD_HAS_NRF5_BOOTLOADER
+	bool "Board has nRF5 bootloader"
+	default y
+	help
+	 If selected, applications are linked so that they can be loaded by
+	 Nordic nRF5 bootloader.
+
+endif # BOARD_KNOT_MESH

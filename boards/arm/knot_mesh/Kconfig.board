@@ -1,0 +1,16 @@
+#
+# Code based on nrf52840_pca10059.
+# Base commit: ef935898d0bb7eb45f464650d79a264b2c3b0e98
+# Edited by KNoT contributors.
+#
+
+# Kconfig - KNoT Mesh board configuration
+#
+# Copyright (c) 2019 CESAR
+# Copyright (c) 2018 Nordic Semiconductor ASA
+#
+# SPDX-License-Identifier: Apache-2.0
+
+config  BOARD_KNOT_MESH
+	bool "KNOT MESH"
+	depends on SOC_NRF52840_QIAA
