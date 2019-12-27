@@ -90,8 +90,8 @@
 
 &i2c0 {
 	status = "ok";
-	sda-pin = <58>;
-	scl-pin = <59>;
+	sda-pin = <26>;
+	scl-pin = <27>;
 };
 
 /*
