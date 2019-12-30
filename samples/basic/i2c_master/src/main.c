@@ -10,8 +10,10 @@ void main(void)
 	struct device *i2c_dev;
 
 	printk("Executing main function \n");
+	u8_t ledState = 1;
+	const u8_t *alguma = &ledState;
 
-	char myString[] = "I2C está funcionando! \n";
+	char myString[] = "1 \n";
 	char stringReceived[20];
 
 	i2c_dev = device_get_binding(DT_NORDIC_NRF_I2C_0_LABEL);
@@ -28,7 +30,7 @@ void main(void)
 
 		/* Sends/receives messages every 5 seconds */
 		if (current_time - last_toggle_time > 5000) {
-			i2c_write(i2c_dev, myString, sizeof(myString), I2C_SLV_ADDR);
+			i2c_write(i2c_dev, alguma, sizeof(ledState), I2C_SLV_ADDR);
 			/* i2c_read(i2c_dev, stringReceived, sizeof(stringReceived) , I2C_SLV_ADDR); */
 			/* printk("Mensagem recebida foi: %s \n", stringReceived); */
 			last_toggle_time = current_time;
