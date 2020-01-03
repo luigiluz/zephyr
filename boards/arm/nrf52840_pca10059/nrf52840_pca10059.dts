@@ -77,14 +77,27 @@
 	status ="ok";
 };
 
+/*
+ * Map UART0 to unused pins to avoid conflits with logger in
+ * serial communication and map UART1 to external pins to be
+ * used with UART devices.
+ */
 &uart0 {
 	compatible = "nordic,nrf-uarte";
 	current-speed = <115200>;
 	status = "ok";
-	tx-pin = <20>;
-	rx-pin = <24>;
-	rts-pin = <17>;
-	cts-pin = <22>;
+	tx-pin = <11>;
+	rx-pin = <12>;
+};
+
+&uart1 {
+	compatible = "nordic,nrf-uarte";
+	current-speed = <115200>;
+	status = "ok";
+	tx-pin = <17>;
+	rx-pin = <20>;
+	rts-pin = <22>;
+	cts-pin = <24>;
 };
 
 &adc {
